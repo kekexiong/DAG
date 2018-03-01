@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.demo.dao.epicInf.numMapper" >
+    <select id="findMaxId" resultType="int">
+        SELECT max(id) as id from num;
+    </select>
+    <select id="insertIn">
+        insert into num(st) values("1");
+    </select>
+</mapper>

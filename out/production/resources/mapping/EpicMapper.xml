@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.demo.dao.epicInf.EpicMapper" >
+  <resultMap id="BaseResultMap" type="com.demo.entity.epicInf.Epic" >
+    <result column="project" property="project" jdbcType="VARCHAR" />
+    <result column="QuestionType" property="questiontype" jdbcType="VARCHAR" />
+    <result column="EpicName" property="epicname" jdbcType="VARCHAR" />
+    <result column="Theme" property="theme" jdbcType="VARCHAR" />
+    <result column="Department" property="department" jdbcType="VARCHAR" />
+    <result column="provider" property="provider" jdbcType="VARCHAR" />
+    <result column="priority" property="priority" jdbcType="VARCHAR" />
+    <result column="CollectionDate" property="collectiondate" jdbcType="TIMESTAMP" />
+    <result column="StartTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="EndTime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="Handler" property="handler" jdbcType="VARCHAR" />
+    <result column="Describe" property="describe" jdbcType="VARCHAR" />
+    <result column="epicType" property="epictype" jdbcType="VARCHAR" />
+    <result column="epciUUID" property="epciuuid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    project, QuestionType, EpicName, Theme, Department, provider, priority, CollectionDate, 
+    StartTime, EndTime, Handler, Describe, epicType, epciUUID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.demo.entity.epicInf.EpicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from epic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.demo.entity.epicInf.EpicExample" >
+    delete from epic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.demo.entity.epicInf.Epic" >
+    insert into epic (project, QuestionType, EpicName, 
+      Theme, Department, provider, 
+      priority, CollectionDate, StartTime, 
+      EndTime, Handler, Describe, 
+      epicType, epciUUID)
+    values (#{project,jdbcType=VARCHAR}, #{questiontype,jdbcType=VARCHAR}, #{epicname,jdbcType=VARCHAR}, 
+      #{theme,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{provider,jdbcType=VARCHAR}, 
+      #{priority,jdbcType=VARCHAR}, #{collectiondate,jdbcType=TIMESTAMP}, #{starttime,jdbcType=TIMESTAMP}, 
+      #{endtime,jdbcType=TIMESTAMP}, #{handler,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, 
+      #{epictype,jdbcType=VARCHAR}, #{epciuuid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.demo.entity.epicInf.Epic" >
+    insert into epic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="project != null" >
+        project,
+      </if>
+      <if test="questiontype != null" >
+        QuestionType,
+      </if>
+      <if test="epicname != null" >
+        EpicName,
+      </if>
+      <if test="theme != null" >
+        Theme,
+      </if>
+      <if test="department != null" >
+        Department,
+      </if>
+      <if test="provider != null" >
+        provider,
+      </if>
+      <if test="priority != null" >
+        priority,
+      </if>
+      <if test="collectiondate != null" >
+        CollectionDate,
+      </if>
+      <if test="starttime != null" >
+        StartTime,
+      </if>
+      <if test="endtime != null" >
+        EndTime,
+      </if>
+      <if test="handler != null" >
+        Handler,
+      </if>
+      <if test="describe != null" >
+        Describe,
+      </if>
+      <if test="epictype != null" >
+        epicType,
+      </if>
+      <if test="epciuuid != null" >
+        epciUUID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="project != null" >
+        #{project,jdbcType=VARCHAR},
+      </if>
+      <if test="questiontype != null" >
+        #{questiontype,jdbcType=VARCHAR},
+      </if>
+      <if test="epicname != null" >
+        #{epicname,jdbcType=VARCHAR},
+      </if>
+      <if test="theme != null" >
+        #{theme,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="provider != null" >
+        #{provider,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="collectiondate != null" >
+        #{collectiondate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handler != null" >
+        #{handler,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="epictype != null" >
+        #{epictype,jdbcType=VARCHAR},
+      </if>
+      <if test="epciuuid != null" >
+        #{epciuuid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.demo.entity.epicInf.EpicExample" resultType="java.lang.Integer" >
+    select count(*) from epic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update epic
+    <set >
+      <if test="record.project != null" >
+        project = #{record.project,jdbcType=VARCHAR},
+      </if>
+      <if test="record.questiontype != null" >
+        QuestionType = #{record.questiontype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.epicname != null" >
+        EpicName = #{record.epicname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.theme != null" >
+        Theme = #{record.theme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.department != null" >
+        Department = #{record.department,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provider != null" >
+        provider = #{record.provider,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priority != null" >
+        priority = #{record.priority,jdbcType=VARCHAR},
+      </if>
+      <if test="record.collectiondate != null" >
+        CollectionDate = #{record.collectiondate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.starttime != null" >
+        StartTime = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null" >
+        EndTime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.handler != null" >
+        Handler = #{record.handler,jdbcType=VARCHAR},
+      </if>
+      <if test="record.describe != null" >
+        Describe = #{record.describe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.epictype != null" >
+        epicType = #{record.epictype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.epciuuid != null" >
+        epciUUID = #{record.epciuuid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update epic
+    set project = #{record.project,jdbcType=VARCHAR},
+      QuestionType = #{record.questiontype,jdbcType=VARCHAR},
+      EpicName = #{record.epicname,jdbcType=VARCHAR},
+      Theme = #{record.theme,jdbcType=VARCHAR},
+      Department = #{record.department,jdbcType=VARCHAR},
+      provider = #{record.provider,jdbcType=VARCHAR},
+      priority = #{record.priority,jdbcType=VARCHAR},
+      CollectionDate = #{record.collectiondate,jdbcType=TIMESTAMP},
+      StartTime = #{record.starttime,jdbcType=TIMESTAMP},
+      EndTime = #{record.endtime,jdbcType=TIMESTAMP},
+      Handler = #{record.handler,jdbcType=VARCHAR},
+      Describe = #{record.describe,jdbcType=VARCHAR},
+      epicType = #{record.epictype,jdbcType=VARCHAR},
+      epciUUID = #{record.epciuuid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+  <select id="findAll" resultType="com.demo.entity.epicInf.Epic">
+    SELECT * FROM epic ORDER BY CollectionDate DESC;
+  </select>
+
+  <select id="findByEpicName" parameterType="String" resultType="com.demo.entity.epicInf.Epic">
+    SELECT * FROM epic where epciuuid=#{epciuuid};
+  </select>
+
+  <select id="findEpicByQueryVo" parameterType="com.demo.entity.epicInf.QueryVo" resultType="com.demo.entity.epicInf.Epic">
+    select * from epic <include refid="epic_where"></include>
+
+  </select>
+
+  <sql id="epic_where">
+    <where>
+      <if test="epciuuid != null and epciuuid != ''">
+        and epciuuid=#{epciuuid}
+      </if>
+      <if test="provider != null and provider != ''">
+        and provider=#{provider}
+      </if>
+      <if test="theme != null and theme != ''">
+        and theme like '%${theme}%'
+      </if>
+      <if test="epictype != null and epictype != ''">
+        and epictype=#{epictype}
+      </if>
+    </where>
+  </sql>
+  <insert id="insertinto" parameterType="com.demo.entity.epicInf.Epic">
+    INSERT INTO epic VALUES(#{project},#{questiontype},#{epicname},#{theme},#{department},#{provider},#{priority},
+    #{collectiondate},#{starttime},#{endtime},#{handler},#{describe},#{epictype},#{epciuuid}
+    );
+  </insert>
+
+  <update id="updateById" parameterType="com.demo.entity.epicInf.Epic">
+    UPDATE epic
+    <set>
+      <if test="project != null and  project != ''">
+        project=#{project} ,
+      </if>
+      <if test="questiontype != null and questiontype  != ''">
+        questiontype=#{questiontype},
+      </if>
+      <if test="epicname != null and  epicname != ''">
+        epicname=#{epicname},
+      </if>
+      <if test="theme != null and  theme != ''">
+        theme=#{theme},
+      </if>
+      <if test="department != null and  department != ''">
+        department=#{department},
+      </if>
+      <if test=" provider != null and  provider != ''">
+        provider=#{provider},
+      </if>
+      <if test="priority != null and priority  != ''">
+        priority=#{priority},
+      </if>
+      <if test="collectiondate != null and  collectiondate != ''">
+        collectiondate=#{collectiondate},
+      </if>
+      <if test="starttime != null and   starttime!= ''">
+        starttime=#{starttime},
+      </if>
+      <if test="endtime != null and   endtime!= ''">
+        endtime=#{endtime},
+      </if>
+      <if test="handler != null and   handler!= ''">
+        handler=#{handler},
+      </if>
+      <if test="describe != null and   describe!= ''">
+        describe=#{describe},
+      </if>
+      <if test="epictype != null and   epictype!= ''">
+        epictype=#{epictype},
+      </if>
+    </set>
+    where epciuuid=#{epciuuid}
+  </update>
+</mapper>
