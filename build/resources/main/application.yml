@@ -5,6 +5,10 @@ spring:
     url: jdbc:oracle:thin:@172.16.135.252:1521/BAPDB
     username: bap
     password: bap_sit
+  freemarker:
+    suffix: .ftl
+    templateEncoding: UTF-8
+    templateLoaderPath: classpath:/ftl/
 
 management:
   security:
@@ -15,6 +19,7 @@ application.message: Hello Phil
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.demo.entity
+
 
 
 
