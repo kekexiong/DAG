@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.dao.TBapInterBasicInfMapper">
+	<resultMap id="tBapInterBasicInfMap" type="com.demo.entity.TBapInterBasicInf" >
+	 <result column="UUID" property="uuid"/>
+	 <result column="INTER_NM" property="interNm"/>
+	 <result column="INTER_DESC" property="interDesc"/>
+	 <result column="INTER_SUMMARY" property="interSummary"/>
+	 <result column="INTER_METHOD_NM" property="interMethodNm"/>
+	 <result column="INTER_METHOD_NM_DESC" property="interMethodNmDesc"/>
+	 <result column="INTER_CLASS_NM" property="interClassNm"/>
+	 <result column="INTER_CLASS_NM_DESC" property="interClassNmDesc"/>
+	 <result column="TRANS_PARAME" property="transParame"/>
+	 <result column="OUT_PARAME" property="outParame"/>
+	 <result column="IN_EXPLAIN" property="inExplain"/>
+	 <result column="OUT_EXPLAIN" property="outExplain"/>
+	</resultMap>
+	
+	<sql id="whereQueryCondition">
+	<where>
+		</where>
+	</sql>
+	
+	<select id="findByCondition" parameterType="java.util.Map" resultType="Map">
+		select * from(select a.*,rownum rn from(
+		SELECT
+						t.UUID as "uuid",
+						t.INTER_NM as "interNm",
+						t.INTER_DESC as "interDesc",
+						t.INTER_SUMMARY as "interSummary",
+						t.INTER_METHOD_NM as "interMethodNm",
+						t.INTER_METHOD_NM_DESC as "interMethodNmDesc",
+						t.INTER_CLASS_NM as "interClassNm",
+						t.INTER_CLASS_NM_DESC as "interClassNmDesc",
+						t.TRANS_PARAME as "transParame",
+						t.OUT_PARAME as "outParame",
+						t.IN_EXPLAIN as "inExplain",
+						t.OUT_EXPLAIN as "outExplain"
+			<!-- 请在此关联查询表 -->
+		FROM bap.T_BAP_INTER_BASIC_INF t
+			<include refid="whereQueryCondition"></include>
+			) a where rownum &lt;= #{endRow}) where rn &gt;#{startRow}
+	</select>
+	<select id="findByConditionCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT
+			COUNT(*) 
+		FROM bap.T_BAP_INTER_BASIC_INF
+		<include refid="whereQueryCondition"></include>
+	</select>
+	<insert id="insert" parameterType="com.demo.entity.TBapInterBasicInf">
+		INSERT INTO bap.T_BAP_INTER_BASIC_INF (
+					UUID,
+					INTER_NM,
+					INTER_DESC,
+					INTER_SUMMARY,
+					INTER_METHOD_NM,
+					INTER_METHOD_NM_DESC,
+					INTER_CLASS_NM,
+					INTER_CLASS_NM_DESC,
+					TRANS_PARAME,
+					OUT_PARAME,
+					IN_EXPLAIN,
+					OUT_EXPLAIN
+		) VALUES (
+					#{uuid,jdbcType=VARCHAR},
+					#{interNm,jdbcType=VARCHAR},
+					#{interDesc,jdbcType=VARCHAR},
+					#{interSummary,jdbcType=VARCHAR},
+					#{interMethodNm,jdbcType=VARCHAR},
+					#{interMethodNmDesc,jdbcType=VARCHAR},
+					#{interClassNm,jdbcType=VARCHAR},
+					#{interClassNmDesc,jdbcType=VARCHAR},
+					#{transParame,jdbcType=VARCHAR},
+					#{outParame,jdbcType=VARCHAR},
+					#{inExplain,jdbcType=VARCHAR},
+					#{outExplain,jdbcType=VARCHAR}
+		)
+	</insert>
+	<select id="getByKey" parameterType="com.demo.entity.TBapInterBasicInf" resultMap="tBapInterBasicInfMap">
+		SELECT
+			UUID, INTER_NM, INTER_DESC, INTER_SUMMARY, INTER_METHOD_NM, INTER_METHOD_NM_DESC, INTER_CLASS_NM, INTER_CLASS_NM_DESC, TRANS_PARAME, OUT_PARAME, IN_EXPLAIN, OUT_EXPLAIN
+		FROM 
+			bap.T_BAP_INTER_BASIC_INF
+		WHERE
+  					UUID=#{uuid}
+	</select>
+	<update id="update" parameterType="com.demo.entity.TBapInterBasicInf">
+		UPDATE bap.T_BAP_INTER_BASIC_INF 
+		SET
+					UUID=#{uuid},
+					INTER_NM=#{interNm},
+					INTER_DESC=#{interDesc},
+					INTER_SUMMARY=#{interSummary},
+					INTER_METHOD_NM=#{interMethodNm},
+					INTER_METHOD_NM_DESC=#{interMethodNmDesc},
+					INTER_CLASS_NM=#{interClassNm},
+					INTER_CLASS_NM_DESC=#{interClassNmDesc},
+					TRANS_PARAME=#{transParame},
+					OUT_PARAME=#{outParame},
+					IN_EXPLAIN=#{inExplain},
+					OUT_EXPLAIN=#{outExplain}
+		WHERE
+  					UUID=#{uuid}
+			
+	</update>
+	<delete id="delete" parameterType="java.util.Map">
+ 		delete from bap.T_BAP_INTER_BASIC_INF
+ 		where 
+  					UUID
+ 		  in 
+		<foreach item="item" index="index" collection="uuids" open="(" separator="," close=")">  
+  			#{item}
+ 		</foreach>
+	</delete>
+
+	<insert id="insertPara" parameterType="com.demo.entity.TBapInterPara">
+		INSERT INTO bap.T_BAP_INTER_PARA (
+		UUID,
+		FIELD_NM,
+		FIELD_TYP,
+		REQUIRED,
+		REMARKS,
+		LEVEL_PARA,
+		INFO_UUID,
+		LEVEL_UUID
+		) VALUES (
+		#{uuid,jdbcType=VARCHAR},
+		#{fieldNm,jdbcType=VARCHAR},
+		#{fieldTyp,jdbcType=VARCHAR},
+		#{required,jdbcType=VARCHAR},
+		#{remarks,jdbcType=VARCHAR},
+		#{levelPara,jdbcType=VARCHAR},
+		#{infoUuid,jdbcType=VARCHAR},
+		#{levelUuid,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<select id="selectParaByUuid" parameterType="String" resultType="Map">
+		SELECT
+						UUID as "uuid",
+						FIELD_NM as "fieldNm",
+						FIELD_TYP as "fieldTyp",
+						REQUIRED as "required",
+						REMARKS as "remarks",
+						LEVEL_PARA as "levelPara",
+						INFO_UUID as "infoUuid",
+						LEVEL_UUID as "levelUuid"
+		FROM bap.T_BAP_INTER_PARA where INFO_UUID=#{uuid}
+	</select>
+</mapper>
