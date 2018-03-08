@@ -770,7 +770,7 @@
 							param.interClassNm = $("#INTER_CLASS_NM_SHOW").val();
 							param.interClassNmDesc = $("#INTER_CLASS_NM_DESC_SHOW").val();
 							param.transParame = paraDateIn+"@@"+paraDateIn2+"@@"+paraDateIn3;
-							param.outParame = paraDateOut;
+							param.outParame = paraDateOut+"@@"+paraDateOut2+"@@"+paraDateOut3;
 							param.inExplain = $("#IN_EXPLAIN_SHOW").val();
 							param.outExplain = $("#OUT_EXPLAIN_SHOW").val();
 				var hiddenType = $("#hiddenType").val();
@@ -1024,7 +1024,15 @@
 		function allotTiming_cancel_btn(level) {
 
                 $("#allotTimingWin"+level).modal('hide');
-
+                if (level==""){
+                    indexCount1 = 15;
+                }
+                else if(level=="2"){
+                    indexCount2 = 15;
+                }
+                else {
+                    indexCount3 = 15;
+                }
         }
 
         var indexCount;
@@ -1095,7 +1103,7 @@
             $("#" + element).show();
         }
 
-        // 定时调拨类型下拉框事件
+        // 下拉框事件
         function selectOnchang(indexCount,level){
 
             var type = document.getElementById(level+"payFlg_"+indexCount).value;
@@ -1141,41 +1149,27 @@
                 }
             }
         }
-		//验证时间间隔方法
-		function daysBetween(DateOne,DateTwo)  
-	    {   
-	        var OneMonth = DateOne.substring(5,DateOne.lastIndexOf ('/'));  
-	        var OneDay = DateOne.substring(DateOne.length,DateOne.lastIndexOf ('/')+1);  
-	        var OneYear = DateOne.substring(0,DateOne.indexOf ('/'));  
-	      
-	        var TwoMonth = DateTwo.substring(5,DateTwo.lastIndexOf ('/'));  
-	        var TwoDay = DateTwo.substring(DateTwo.length,DateTwo.lastIndexOf ('/')+1);  
-	        var TwoYear = DateTwo.substring(0,DateTwo.indexOf ('/'));  
-	      
-	        var cha=((Date.parse(OneMonth+'/'+OneDay+'/'+OneYear)- Date.parse(TwoMonth+'/'+TwoDay+'/'+TwoYear))/86400000);   
-	        return Math.abs(cha);  
-	    }
 
         $("#add_btn_in").on('click', function() {
             $("#allotTimingTable").DataTable().clear().draw();
             $("#allotTimingWin").modal('show');
             paraFlag="in";
-            var demo;
-             indexCount=demo;
-             indexCount1 = 15;
-             indexCount2 = 15;
-             indexCount3 = 15;
+            initPara();
         });
         $("#add_btn_out").on('click', function() {
             $("#allotTimingTable").DataTable().clear().draw();
             $("#allotTimingWin").modal('show');
             paraFlag="out";
-            var demo;
-             indexCount=demo;
-             indexCount1 = 15;
-             indexCount2 = 15;
-             indexCount3 = 15;
+            initPara();
         });
+		//初始化参数
+		function initPara() {
+            var demo;
+            indexCount=demo;
+            indexCount1 = 15;
+            indexCount2 = 15;
+            indexCount3 = 15;
+        }
 
         //全选传入参数数据
         function checkAllotTimingAll(checked) {
@@ -1193,6 +1187,15 @@
 		function saveTableRow(level){
 
             savePara(paraFlag,level);
+            if (level==""){
+                indexCount1 = 15;
+            }
+            else if(level=="2"){
+                indexCount2 = 15;
+            }
+            else {
+                indexCount3 = 15;
+            }
         }
 
 		function savePara(type,level) {
@@ -1229,7 +1232,6 @@
                     param.uuid="IN_"+myuuid;
                     var allotTimingDatas = JSON.stringify(param);
                     paraDateIn=allotTimingDatas;
-                    alert(paraDateIn);
                 }
                 else{
                     param.uuid="OUT_"+myuuid;
@@ -1262,7 +1264,6 @@
                     param.uuid="IN_"+myuuid;
                     var allotTimingDatas = JSON.stringify(param);
                     paraDateIn2=allotTimingDatas;
-                    alert(paraDateIn2);
                 }
                 else{
                     param.uuid="OUT_"+myuuid;
@@ -1295,7 +1296,6 @@
                     param.uuid="IN_"+myuuid;
                     var allotTimingDatas = JSON.stringify(param);
                     paraDateIn3=allotTimingDatas;
-                    alert(paraDateIn3);
                 }
                 else{
                     param.uuid="OUT_"+myuuid;

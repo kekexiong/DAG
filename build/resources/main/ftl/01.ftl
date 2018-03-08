@@ -98,7 +98,7 @@
                                     </#list>
                                     </table>
 
-                                    <#if level=="2">
+                                    <#if levelIn=="2">
                                     <table border="1">
                                         <tr>
                                             <th style="font-family: 黑体" bgcolor="#f5f5dc" width="25%">字段名称</th>
@@ -118,7 +118,7 @@
                                     </table>
                                     </#if>
 
-                                    <#if level=="3">
+                                    <#if levelIn=="3">
                                     <table border="1">
                                         <tr>
                                             <th style="font-family: 黑体" bgcolor="#f5f5dc" width="25%">字段名称</th>
@@ -177,6 +177,65 @@
                                         </tr>
                                     </#list>
                                     </table>
+
+                                    <#if levelOut=="2">
+                                    <table border="1">
+                                        <tr>
+                                            <th style="font-family: 黑体" bgcolor="#f5f5dc" width="25%">字段名称</th>
+                                            <td style="font-family: 黑体" bgcolor="#f5f5dc" width="25%">类型</td>
+                                            <td style="font-family: 黑体" bgcolor="#f5f5dc" width="25%">输入项</td>
+                                            <td style="font-family: 黑体" bgcolor="#f5f5dc" width="25%">备注</td>
+
+                                        </tr>
+                                        <#list paraOutList2 as lender>
+                                            <tr>
+                                                <td>${lender.fieldNm!""}</td>
+                                                <td>${lender.fieldTyp!""}</td>
+                                                <td>${lender.required!""}</td>
+                                                <td>${lender.remarks!""}</td>
+                                            </tr>
+                                        </#list>
+                                    </table>
+                                    </#if>
+
+                                    <#if levelOut=="3">
+                                    <table border="1">
+                                        <tr>
+                                            <th style="font-family: 黑体" bgcolor="#f5f5dc" width="25%">字段名称</th>
+                                            <td style="font-family: 黑体" bgcolor="#f5f5dc" width="25%">类型</td>
+                                            <td style="font-family: 黑体" bgcolor="#f5f5dc" width="25%">输入项</td>
+                                            <td style="font-family: 黑体" bgcolor="#f5f5dc" width="25%">备注</td>
+
+                                        </tr>
+                                        <#list paraOutList2 as lender>
+                                            <tr>
+                                                <td>${lender.fieldNm!""}</td>
+                                                <td>${lender.fieldTyp!""}</td>
+                                                <td>${lender.required!""}</td>
+                                                <td>${lender.remarks!""}</td>
+                                            </tr>
+                                        </#list>
+                                    </table>
+
+                                    <table border="1">
+                                        <tr>
+                                            <th style="font-family: 黑体" bgcolor="#f5f5dc" width="25%">字段名称</th>
+                                            <td style="font-family: 黑体" bgcolor="#f5f5dc" width="25%">类型</td>
+                                            <td style="font-family: 黑体" bgcolor="#f5f5dc" width="25%">输入项</td>
+                                            <td style="font-family: 黑体" bgcolor="#f5f5dc" width="25%">备注</td>
+
+                                        </tr>
+                                        <#list paraOutList3 as lender>
+                                            <tr>
+                                                <td>${lender.fieldNm!""}</td>
+                                                <td>${lender.fieldTyp!""}</td>
+                                                <td>${lender.required!""}</td>
+                                                <td>${lender.remarks!""}</td>
+                                            </tr>
+                                        </#list>
+                                    </table>
+                                    </#if>
+
 
                                     <h2>5 响应码说明</h2>
 
