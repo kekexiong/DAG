@@ -68,4 +68,6 @@ public interface TBapInterBasicInfMapper {
 	 int insertPara(TBapInterPara tBapInterPara);
 
 	 List<Map<String,Object>> selectParaByUuid(String uuid);
+
+	 int deletePara(Map<String, Object> map);
 }

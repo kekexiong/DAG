@@ -182,4 +182,30 @@ public class TBapInterBasicInfController extends BaseController {
             return super.setFailure("删除失败!");
         }
     }
+
+    /**
+     * 根据主键取得详细
+     * @param session
+     * @param paramVo
+     * @return map
+     * @author hu_pf@suixingpay.com
+     * @date 20180301 14:43:14
+     */
+    @RequestMapping(value = "/getDetail", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> getByKey(HttpSession session, @ModelAttribute TBapInterBasicInf paramVo) {
+        String tcd = "TBapInterBasicInfController.queryCondition";
+        String opNm = "接口信息-详细";
+        try {
+            LOGGER.info(LogUtils.genLogs(LogType.BAP, tcd, "", opNm + "--begin"));
+            TBapInterBasicInf detail= tBapInterBasicInfService.getByKey(paramVo);
+            LOGGER.info(LogUtils.genLogs(LogType.BAP, tcd, "", opNm + "--end"));
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("data", detail);
+            return map;
+        } catch (Exception e) {
+            LOGGER.error(LogUtils.genLogs(LogType.BAP, tcd, "", opNm + "--end,异常" + e.getMessage()));
+            return super.setFailure("查询失败");
+        }
+    }
 }

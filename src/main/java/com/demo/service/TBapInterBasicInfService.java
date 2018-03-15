@@ -92,10 +92,14 @@ public class TBapInterBasicInfService {
         ParameVo parameVoOut = new ParameVo();
         String[] paraArray = tBapInterBasicInf.getTransParame().split("@@");
         String[] paraArrayOut = tBapInterBasicInf.getOutParame().split("@@");
-        parameVo = gson.fromJson(paraArray[0], ParameVo.class);
-        parameVoOut = gson.fromJson(paraArrayOut[0], ParameVo.class);
-        this.inserMethod(parameVo, paraArray);
-        this.inserMethod(parameVoOut, paraArrayOut);
+        if (!"undefined".equals(paraArray[0])){
+            parameVo = gson.fromJson(paraArray[0], ParameVo.class);
+            this.inserMethod(parameVo, paraArray);
+        }
+        if (!"undefined".equals(paraArray[0])){
+            parameVoOut = gson.fromJson(paraArrayOut[0], ParameVo.class);
+            this.inserMethod(parameVoOut, paraArrayOut);
+        }
         tBapInterBasicInf.setTransParame(parameVo.getUuid());
         tBapInterBasicInf.setOutParame(parameVoOut.getUuid());
         return tBapInterBasicInfMapper.insert(tBapInterBasicInf);
@@ -109,7 +113,7 @@ public class TBapInterBasicInfService {
             tBapInterPara.setUuid(uuid);
             tBapInterPara.setInfoUuid(parameVo.getUuid());
             tBapInterPara.setLevelPara(parameVo.getLevel());
-            if ("Object".equals(tBapInterPara.getFieldTyp())) {
+            if ("Object".equals(tBapInterPara.getFieldTyp())&&!"undefined".equals(paraArray[1])) {
                 tBapInterPara.setLevelUuid(levelUuid);
                 ParameVo parameVo2 = gson.fromJson(paraArray[1], ParameVo.class);
                 for (TBapInterPara tBapInterPara2 : parameVo2.getDatas()) {
@@ -118,7 +122,7 @@ public class TBapInterBasicInfService {
                     tBapInterPara2.setInfoUuid(levelUuid);
                     tBapInterPara2.setUuid(uuid2);
                     tBapInterPara2.setLevelPara(parameVo2.getLevel());
-                    if ("Object".equals(tBapInterPara2.getFieldTyp())) {
+                    if ("Object".equals(tBapInterPara2.getFieldTyp())&&!"undefined".equals(paraArray[2])) {
                         tBapInterPara2.setLevelUuid(levelUuid2);
                         ParameVo parameVo3 = gson.fromJson(paraArray[2], ParameVo.class);
                         for (TBapInterPara tBapInterPara3 : parameVo3.getDatas()) {
@@ -155,7 +159,7 @@ public class TBapInterBasicInfService {
     /**
      * @param paraUuid, flag
      * @return java.util.Map<java.lang.String,java.lang.Object>
-     * @Description: 生成模板数据方法抽出的公共方法
+     * @Description: generatePara方法抽出的公共方法
      * @author hu_pf@suixingpay.com
      * @date 2018/3/8 10:36
      */
@@ -214,9 +218,54 @@ public class TBapInterBasicInfService {
      * @date 20180301 14:43:14
      */
     public int delete(Map<String, Object> map) {
+        String deleteIn=this.getDeleteUuids("in",map);
+        String deleteOut=this.getDeleteUuids("out",map);
+        String deletePara=deleteIn+","+deleteOut;
+        if (!",".equals(deletePara)){
+            Map<String, Object> paramsMap = new HashMap<String, Object>();
+            paramsMap.put("paraUuids", deletePara.split(","));
+            tBapInterBasicInfMapper.deletePara(paramsMap);
+        }
         return tBapInterBasicInfMapper.delete(map);
     }
 
+    public String getDeleteUuids(String flag,Map<String, Object> map){
+        String [] uuids= (String[]) map.get("uuids");
+        TBapInterBasicInf tBapInterBasicInf=new TBapInterBasicInf();
+        StringBuffer paraUuids= new StringBuffer();
+        String queryCon="";
+        for (int i=0;i<uuids.length;i++){
+            tBapInterBasicInf.setUuid(uuids[i]);
+            TBapInterBasicInf resultEntity = this.getByKey(tBapInterBasicInf);
+            if ("in".equals(flag)){
+                queryCon=resultEntity.getTransParame();
+            }
+            else {
+                queryCon=resultEntity.getOutParame();
+            }
+            if (queryCon!=""&&queryCon!=null){
+                if (i==0){
+                    paraUuids.append(queryCon);
+                }else {
+                    paraUuids.append(","+queryCon);
+                }
+
+                List<Map<String, Object>> paraList=this.selectParaByUuid(queryCon);
+                for (Map<String, Object> paraMap:paraList){
+                    if ("Object".equals(paraMap.get("fieldTyp"))){
+                        paraUuids.append(","+paraMap.get("levelUuid"));
+                        List<Map<String, Object>> paraList2=this.selectParaByUuid((String) paraMap.get("levelUuid"));
+                        for (Map<String, Object> paraMap2:paraList2){
+                            if ("Object".equals(paraMap2.get("fieldTyp"))){
+                                paraUuids.append(","+paraMap2.get("levelUuid"));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return paraUuids.toString();
+    }
     public List<Map<String, Object>> selectParaByUuid(String uuid) {
         return tBapInterBasicInfMapper.selectParaByUuid(uuid);
     }

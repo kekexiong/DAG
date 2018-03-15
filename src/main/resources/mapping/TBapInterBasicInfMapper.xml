@@ -148,4 +148,14 @@
 						LEVEL_UUID as "levelUuid"
 		FROM bap.T_BAP_INTER_PARA where INFO_UUID=#{uuid}
 	</select>
+
+	<delete id="deletePara" parameterType="java.util.Map">
+		delete from bap.T_BAP_INTER_PARA
+		where
+		INFO_UUID
+		in
+		<foreach item="item" index="index" collection="paraUuids" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
 </mapper>

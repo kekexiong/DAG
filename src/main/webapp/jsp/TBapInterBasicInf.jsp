@@ -58,13 +58,13 @@
 														<button type="button" id="reset_btn" class="btn red">
 															<i class="fa fa-refresh"></i> 重置
 														</button>
-														<button type="button" id="add_btn" class="btn btn-info"> 
+														<button type="button" id="add_btn" class="btn btn-info">
 															<i class="fa fa-plus"></i> 添加
 														</button>
-														<button type="button" id="edit_btn" class="btn tn btn btn-primary"> 
+														<button type="button" id="edit_btn" class="btn tn btn btn-primary">
 															<i class="fa fa-edit"></i> 修改
 														</button>
-														<button type="button" id="dele_btn" class="btn tn btn btn-primary"> 
+														<button type="button" id="dele_btn" class="btn tn btn btn-primary">
 															<i class="fa fa-trash-o fa-lg"></i> 删除
 														</button>
 													</div>
@@ -95,20 +95,20 @@
 										id="queryMecGrid">
 										<thead>
 											<tr>
-												<th><input type="checkbox" class="group-checkable" onclick="checkAll(this.checked)" /></th> 
+												<th><input type="checkbox" class="group-checkable" onclick="checkAll(this.checked)" /></th>
 													<th class="nowrap">序号</th>
-															<th class="nowrap">接口名称</th> 
-															<th class="nowrap">接口描述</th> 
-															<th class="nowrap">接口概述</th> 
-															<th class="nowrap">接口方法名</th> 
-															<th class="nowrap">接口方法名描述</th> 
-															<th class="nowrap">接口类名</th> 
-															<th class="nowrap">接口类名描述</th> 
-															<th class="nowrap">传入参数</th> 
-															<th class="nowrap">传出参数</th> 
-															<th class="nowrap">输入说明</th> 
-															<th class="nowrap">响应说明</th> 
-														<th class="nowrap">操作</th> 
+															<th class="nowrap">接口名称</th>
+															<th class="nowrap">接口描述</th>
+															<th class="nowrap">接口概述</th>
+															<th class="nowrap">接口方法名</th>
+															<th class="nowrap">接口方法名描述</th>
+															<th class="nowrap">接口类名</th>
+															<th class="nowrap">接口类名描述</th>
+															<th class="nowrap">传入参数</th>
+															<th class="nowrap">传出参数</th>
+															<th class="nowrap">输入说明</th>
+															<th class="nowrap">响应说明</th>
+														<th class="nowrap">操作</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -392,7 +392,7 @@
 		<!----------------------------------- 添加(修改)功能弹出页面（获取输入值的输入框后缀统一增加_SHOW标识符） ------------------------------------------>
 		<div class="modal fade" id="addOrUpdateWin" tabindex="-1" role="dialog" data-backdrop="static" data-width="700px" data-height="300px">
 	        <div class="modal-header">
-	           <button type="button" class="close" 
+	           <button type="button" class="close"
 	              data-dismiss="modal" aria-hidden="true">
 	                 &times;
 	           </button>
@@ -406,7 +406,6 @@
 	                       	<input type="hidden" value = "" id = "hiddenType"/>
 	                       	<input type="hidden" value = "" id = "hiddenUUid"/>
 	                           				                           				                           			<!-- 普通输入框 -->
-
 	                           												                           				                           				                           			<!-- 普通输入框 -->
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 											<div class="form-group">
@@ -586,7 +585,7 @@
     	<!-- ---------------------------------------详情页面展示(获取输入值的输入框后缀统一增加_VIEW标识符)------------------------------------------------------------ -->
 			<div class="modal fade" id="viewWin" tabindex="-1" role="dialog" data-backdrop="static" data-width="700px" data-height="300px">
 		        <div class="modal-header">
-		           <button type="button" class="close" 
+		           <button type="button" class="close"
 		              data-dismiss="modal" aria-hidden="true">
 		                 &times;
 		           </button>
@@ -634,13 +633,13 @@
 		var toalPage;
 		//数据列表缓存
 		var tableData;
-	
+
 		var importLimit = 0;
-	
+
 		var importPage = 1;
-	
+
 		var importStart = 0;
-	
+
 		var importTotalPage;
 
 		var paraDateIn;
@@ -650,11 +649,11 @@
         var paraDateIn3;
         var paraDateOut3;
         var paraFlag;
-	
+
 		function pageing(opp) {
 			$(window.document).scrollTop(0, 500);
 			limit = $("#limit  option:selected").text();
-	
+
 			if (opp == 'pro') {
 				if (page > 1) {
 					page = page - 1;
@@ -683,7 +682,7 @@
 					bootbox.alert('对不起没有你要跳转的页面');
 					return;
 				}
-	
+
 				start = (page - 1) * limit;
 			} else {
 				if (page == 1 && opp == 1) {
@@ -698,7 +697,7 @@
 					bootbox.alert('对不起没有你要跳转的页面');
 					return;
 				}
-	
+
 				start = (page - 1) * limit;
 			}
 			$('#queryMecGrid > tbody').empty();
@@ -720,7 +719,7 @@
 			<!--getComboStore系统表生成下拉框    参数说明1：传入值，用于下拉框回显，2下拉夸ID，3传入key值，4传入FALSE或者TRUE用于下拉框可选或者可读状态，FALSE下拉框可以不是disabled，TRUE是disabled状态-->
 			<!--getCustomStore自定义下拉框    参数说明1：传入值，用于下拉框回显，2下拉夸ID，3传入FALSE或者TRUE用于下拉框可选或者可读状态，FALSE下拉框可以不是disabled，TRUE是disabled状态-->
 			<!--如果不需要回显第一个参数传入""，如果不需要设定disabled属性传入FALSE-->
-			//初始化输入框时间默认值方法	
+			//初始化输入框时间默认值方法
 			initDefaultDate();
 	    	//重置按钮
 			$("#reset_btn").on('click', function() {
@@ -769,16 +768,20 @@
 							param.interMethodNmDesc = $("#INTER_METHOD_NM_DESC_SHOW").val();
 							param.interClassNm = $("#INTER_CLASS_NM_SHOW").val();
 							param.interClassNmDesc = $("#INTER_CLASS_NM_DESC_SHOW").val();
-							param.transParame = paraDateIn+"@@"+paraDateIn2+"@@"+paraDateIn3;
-							param.outParame = paraDateOut+"@@"+paraDateOut2+"@@"+paraDateOut3;
+                            param.transParame = paraDateIn+"@@"+paraDateIn2+"@@"+paraDateIn3;
+                            param.outParame = paraDateOut+"@@"+paraDateOut2+"@@"+paraDateOut3;
 							param.inExplain = $("#IN_EXPLAIN_SHOW").val();
 							param.outExplain = $("#OUT_EXPLAIN_SHOW").val();
 				var hiddenType = $("#hiddenType").val();
 				var url = "";
 				if("1" == hiddenType){
-					url = baseURL + "/ses/tBapInterBasicInf/save";
+                    param.transParame = paraDateIn+"@@"+paraDateIn2+"@@"+paraDateIn3;
+                    param.outParame = paraDateOut+"@@"+paraDateOut2+"@@"+paraDateOut3;
+				    url = baseURL + "/ses/tBapInterBasicInf/save";
 				}else if ("2" == hiddenType){
-					url = baseURL + "/ses/tBapInterBasicInf/update";
+                    param.transParame = "";
+                    param.outParame = "";
+				    url = baseURL + "/ses/tBapInterBasicInf/update";
 					param.uuid = $("#hiddenUUid").val();
 				}else{
 					url = "";
@@ -798,14 +801,27 @@
 						reloadGrid();
 					},
 					error:function(){
-						
+
 					}
 				});
+                initParaDate();
 			});
 			//弹出页面取消按钮（添加/修改）
 			$("#addform_cancel_btn").on('click',function(){
 				$("#addOrUpdateWin").modal('hide');
+                initParaDate();
 			});
+
+            function initParaDate() {
+                var demo;
+			    paraDateIn=demo;
+                paraDateOut=demo;
+                paraDateIn2=demo;
+                paraDateOut2=demo;
+                paraDateIn3=demo;
+                paraDateOut3=demo;
+                paraFlag=demo;
+            }
 	    	//删除按钮
 			$("#dele_btn").on('click', function() {
 				var selectRocords = $("#queryMecGrid tbody input:checked");
@@ -841,8 +857,8 @@
 		     	                		bootbox.alert("操作失败！ "+data.msg);
 		     	                	}
 		     	    			},
-		     	                	
-		     	         
+
+
 		     	                error: function(error) {
 		     	                	bootbox.alert("操作失败!");
 		     	                }
@@ -869,7 +885,7 @@
 					dataType : "json",
 					success:function(data){
 					<!--修改页面展示字段-->
-								document.getElementById('UUID_SHOW').value=data.data.uuid;
+//								document.getElementById('UUID_SHOW').value=data.data.uuid;
 								document.getElementById('INTER_NM_SHOW').value=data.data.interNm;
 								document.getElementById('INTER_DESC_SHOW').value=data.data.interDesc;
 								document.getElementById('INTER_SUMMARY_SHOW').value=data.data.interSummary;
@@ -877,8 +893,8 @@
 								document.getElementById('INTER_METHOD_NM_DESC_SHOW').value=data.data.interMethodNmDesc;
 								document.getElementById('INTER_CLASS_NM_SHOW').value=data.data.interClassNm;
 								document.getElementById('INTER_CLASS_NM_DESC_SHOW').value=data.data.interClassNmDesc;
-								document.getElementById('TRANS_PARAME_SHOW').value=data.data.transParame;
-								document.getElementById('OUT_PARAME_SHOW').value=data.data.outParame;
+//								document.getElementById('TRANS_PARAME_SHOW').value=data.data.transParame;
+//								document.getElementById('OUT_PARAME_SHOW').value=data.data.outParame;
 								document.getElementById('IN_EXPLAIN_SHOW').value=data.data.inExplain;
 								document.getElementById('OUT_EXPLAIN_SHOW').value=data.data.outExplain;
 					document.getElementById('hiddenUUid').value=data.data.uuid;
@@ -937,8 +953,8 @@
 	    	}
 	    	var dateString = myDate.getFullYear()+"/"+tempMonth+"/"+tempDay;
 	    }
-		
-		
+
+
 		var queryInner_Path = baseURL + "/ses/tBapInterBasicInf/query";
 		//实现查询按钮方法
 		function reloadGrid(){
@@ -949,7 +965,7 @@
 	    		limit=$("#limit").val();
 	    	}
 	    	start=(page-1)*limit;
-			
+
 			//获取筛选条件输入值
 			var param = {page:page,start:start,limit:limit};
 			App.blockUI({target:"body",boxed:!0,message:"查询中，请稍后...",zIndex:12000});
@@ -992,7 +1008,7 @@
     			    		trData.push("<a href='javascript:void(0)'  onclick=genarate('"+obj.uuid+"')><i class='fa fa-plus'></i>生成文档</a>");
     			    	for(i=0; i < trData.length; i++){
     			    		if(trData[i] == undefined){
-    			    			trData[i] = ''; 
+    			    			trData[i] = '';
     			    		}
     			    	}
                        	$("#queryMecGrid").DataTable().row.add(trData).draw();
@@ -1016,10 +1032,10 @@
                     //setIframeHeight($('#frame_'+currentTabId,parent.document)[0]);
 				},
 				error:function(error){
-					
+
 				}
 			});
-			
+
 		}
 		function allotTiming_cancel_btn(level) {
 
