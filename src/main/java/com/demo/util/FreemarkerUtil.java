@@ -62,7 +62,7 @@ public class FreemarkerUtil {
         FileWriter out = null;
         try {
             // 通过一个文件输出流，就可以写到相应的文件中，此处用的是绝对路径
-            out = new FileWriter(new File("/Users/hupengfei/Downloads/" + outFile));
+            out = new FileWriter(new File("D:/dag/" + outFile));
             Template temp = this.getTemplate(name);
             temp.process(root, out);
         } catch (IOException e) {

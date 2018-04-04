@@ -68,6 +68,11 @@ public class TBapInterBasicInf {
 	 * 响应说明
 	 */
 		private String outExplain;
+
+	/**
+	 * 响应信息的UUID
+	 */
+	private String codeMessageUuid;
 	
 	
 	public TBapInterBasicInf() {
@@ -241,7 +246,15 @@ public class TBapInterBasicInf {
 		public void setOutExplain(String outExplain) {
 			this.outExplain = outExplain;
 		}
-	 
+
+	public String getCodeMessageUuid() {
+		return codeMessageUuid;
+	}
+
+	public void setCodeMessageUuid(String codeMessageUuid) {
+		this.codeMessageUuid = codeMessageUuid;
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this,

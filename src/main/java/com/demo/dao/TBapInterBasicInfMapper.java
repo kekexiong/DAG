@@ -70,4 +70,15 @@ public interface TBapInterBasicInfMapper {
 	 List<Map<String,Object>> selectParaByUuid(String uuid);
 
 	 int deletePara(Map<String, Object> map);
+
+	/**
+	 * 将响应码插入数据库中
+	 * @author fan_rc@suixingpay.com
+	 * @date   20180402 14:43:14
+	 * @param map
+	 * @return
+	 */
+	int insertCodeMessage(Map<String, Object> map);
+
+	List<Map<String,Object>> selectCodeMessByUuid(String uuid);
 }

@@ -174,7 +174,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-					<h4 class="modal-title">传入参数添加</h4>
+					<h4 class="modal-title" id = "paramAdd_title">传入参数添加</h4>
 				</div>
 				<div class="modal-body">
 					<div class="portlet-body form">
@@ -197,6 +197,7 @@
 													<th>字段类型</th>
 													<th>是否要求输入</th>
 													<th>备注</th>
+													<th>描述</th>
 												</tr>
 												</thead>
 												<tbody>
@@ -214,15 +215,15 @@
 													<div class="col-md-12" style="text-align: center;">
 														<button type="button" id="allotTiming_add_btn"
 																class="btn btn-success" onClick="addTableRow('1');">
-															<i class="fa fa-share"></i>添加
+															<i class="fa fa-plus"></i>添加
 														</button>
 														<button type="button" id="allotTiming_del_btn"
 																class="btn red" onClick="delTableRow('')">
-															<i class="fa fa-share"></i>删除
+															<i class="fa fa-trash-o fa-lg"></i>删除
 														</button>
 														<button type="button" id="allotTiming_save_btn"
 																class="btn btn-info" onClick="saveTableRow('')">
-															<i class="fa fa-share"></i>提交
+															<i class="fa fa-save"></i>提交
 														</button>
 														<button type="button" id="allotTiming_cancel_btn1"
 																onClick="allotTiming_cancel_btn('')"
@@ -248,7 +249,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-					<h4 class="modal-title">二级传入参数添加</h4>
+					<h4 class="modal-title">二级参数添加</h4>
 				</div>
 				<div class="modal-body">
 					<div class="portlet-body form">
@@ -256,7 +257,6 @@
 							  class="form-horizontal" id="allotTimingForm2">
 							<div class="form-body">
 								<div class="row norow">
-
 									<br /> <br />
 									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 										<div class="form-group">
@@ -288,15 +288,15 @@
 													<div class="col-md-12" style="text-align: center;">
 														<button type="button" id="allotTiming_add_btn2"
 																class="btn btn-success" onClick="addTableRow('2');">
-															<i class="fa fa-share"></i>添加
+															<i class="fa fa-plus"></i>添加
 														</button>
 														<button type="button" id="allotTiming_del_btn2"
 																class="btn red" onClick="delTableRow('2')">
-															<i class="fa fa-share"></i>删除
+															<i class="fa fa-trash-o fa-lg"></i>删除
 														</button>
 														<button type="button" id="allotTiming_save_btn2"
 																class="btn btn-info" onClick="saveTableRow('2')">
-															<i class="fa fa-share"></i>提交
+															<i class="fa fa-save"></i>提交
 														</button>
 														<button type="button" id="allotTiming_cancel_btn2"
 																onClick="allotTiming_cancel_btn('2')"
@@ -322,7 +322,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-					<h4 class="modal-title">三级传入参数添加</h4>
+					<h4 class="modal-title">三级参数添加</h4>
 				</div>
 				<div class="modal-body">
 					<div class="portlet-body form">
@@ -330,7 +330,6 @@
 							  class="form-horizontal" id="allotTimingForm3">
 							<div class="form-body">
 								<div class="row norow">
-
 									<br /> <br />
 									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 										<div class="form-group">
@@ -362,15 +361,15 @@
 													<div class="col-md-12" style="text-align: center;">
 														<button type="button" id="allotTiming_add_btn3"
 																class="btn btn-success" onClick="addTableRow('3');">
-															<i class="fa fa-share"></i>添加
+															<i class="fa fa-plus"></i>添加
 														</button>
 														<button type="button" id="allotTiming_del_btn3"
 																class="btn red" onClick="delTableRow('3')">
-															<i class="fa fa-share"></i>删除
+															<i class="fa fa-trash-o fa-lg"></i>删除
 														</button>
 														<button type="button" id="allotTiming_save_btn3"
 																class="btn btn-info" onClick="saveTableRow('3')">
-															<i class="fa fa-share"></i>提交
+															<i class="fa fa-save"></i>提交
 														</button>
 														<button type="button" id="allotTiming_cancel_btn3"
 																onClick="allotTiming_cancel_btn('3')"
@@ -389,8 +388,78 @@
 					</div>
 				</div>
 			</div>
+
+			<!----------------------------------- 添加响应码说明 ------------------------------------------>
+			<div class="modal fade" id="add_message_modal" tabindex="-1"
+				 role="dialog" data-backdrop="static" data-width="800px"
+				 data-height="400px">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					<h4 class="modal-title">添加响应码说明</h4>
+				</div>
+				<div class="modal-body">
+					<div class="portlet-body form">
+						<form action="<%=request.getContextPath()%>/"
+							  class="form-horizontal" id="add_message_form">
+							<div class="form-body">
+								<div class="row norow">
+									<br /> <br />
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group">
+											<table border="2"
+												   class="table table-striped table-bordered table-hover table-checkable order-column"
+												   style="height: 100px;" id="add_message_table">
+												<thead>
+												<tr>
+													<th><input type="checkbox" class="group-checkable"
+															   onclick="checkAllotTimingAll(this.checked)" /></th>
+													<th>code</th>
+													<th>描述</th>
+												</tr>
+												</thead>
+											</table>
+										</div>
+										<div style="height: 20px;"></div>
+									</div>
+									<br />
+									<div class="form-actions">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="row">
+													<div class="col-md-12" style="text-align: center;">
+														<button type="button" id="add_message_modal_add_btn2"
+																class="btn btn-success" onClick="addMessageRow();">
+															<i class="fa fa-share"></i>添加
+														</button>
+														<button type="button" id="add_message_modal_del_btn2"
+																class="btn red" onClick="delMessageRow()">
+															<i class="fa fa-share"></i>删除
+														</button>
+														<button type="button" id="add_message_modal_save_btn2"
+																class="btn btn-info" onClick="saveMessageRow()">
+															<i class="fa fa-save"></i>提交
+														</button>
+														<button type="button" id="add_message_modal_cancel_btn2"
+																onClick="message_cancel_btn()"
+																class="btn red">
+															<i class="fa fa-share"></i>取消
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
 		<!----------------------------------- 添加(修改)功能弹出页面（获取输入值的输入框后缀统一增加_SHOW标识符） ------------------------------------------>
-		<div class="modal fade" id="addOrUpdateWin" tabindex="-1" role="dialog" data-backdrop="static" data-width="700px" data-height="300px">
+		<div class="modal fade" id="addOrUpdateWin" tabindex="-1" role="dialog" data-backdrop="static" data-width="750px" data-height="300px">
 	        <div class="modal-header">
 	           <button type="button" class="close"
 	              data-dismiss="modal" aria-hidden="true">
@@ -410,7 +479,7 @@
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 											<div class="form-group">
 												<label for="span-medium-2"
-													class="control-label col-md-4 text-right">接口名称:</label>
+													class="control-label col-md-4 text-right"><font color="red">*</font>接口名称:</label>
 												<div class="col-md-8 paddingnone">
 													<input name="interNm"
 														id="INTER_NM_SHOW" class="form-control"
@@ -424,7 +493,7 @@
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 											<div class="form-group">
 												<label for="span-medium-2"
-													class="control-label col-md-4 text-right">接口方法名:</label>
+													class="control-label col-md-4 text-right"><font color="red">*</font>接口方法名:</label>
 												<div class="col-md-8 paddingnone">
 													<input name="interMethodNm"
 														id="INTER_METHOD_NM_SHOW" class="form-control"
@@ -436,7 +505,7 @@
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 											<div class="form-group">
 												<label for="span-medium-2"
-													class="control-label col-md-4 text-right">接口方法名描述:</label>
+													class="control-label col-md-4 text-right"><font color="red">*</font>接口方法名描述:</label>
 												<div class="col-md-8 paddingnone">
 
 													<input name="interMethodNmDesc"
@@ -449,7 +518,7 @@
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 											<div class="form-group">
 												<label for="span-medium-2"
-													class="control-label col-md-4 text-right">接口类名:</label>
+													class="control-label col-md-4 text-right"><font color="red">*</font>接口类名:</label>
 												<div class="col-md-8 paddingnone">
 													<input name="interClassNm"
 														id="INTER_CLASS_NM_SHOW" class="form-control"
@@ -461,7 +530,7 @@
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 											<div class="form-group">
 												<label for="span-medium-2"
-													class="control-label col-md-4 text-right">接口类名描述:</label>
+													class="control-label col-md-4 text-right"><font color="red">*</font>接口类名描述:</label>
 												<div class="col-md-8 paddingnone">
 													<input name="interClassNmDesc"
 														id="INTER_CLASS_NM_DESC_SHOW" class="form-control"
@@ -473,7 +542,7 @@
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 											<div class="form-group">
 												<label for="span-medium-2"
-													class="control-label col-md-4 text-right">传入参数:</label>
+													class="control-label col-md-4 text-right"><font color="red">*</font>传入参数:</label>
 												<div class="col-md-8 paddingnone">
 													<button type="button" id="add_btn_in">
 														<i class="fa fa-plus"></i> 添加传入参数
@@ -485,7 +554,7 @@
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 											<div class="form-group">
 												<label for="span-medium-2"
-													class="control-label col-md-4 text-right">传出参数:</label>
+													class="control-label col-md-4 text-right"><font color="red">*</font>传出参数:</label>
 												<div class="col-md-8 paddingnone">
 													<button type="button" id="add_btn_out">
 														<i class="fa fa-plus"></i> 添加传出参数
@@ -494,13 +563,13 @@
 											</div>
 										</div>
 
-							   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="visibility: hidden">
+							   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 								   <div class="form-group">
 									   <label for="span-medium-2"
-											  class="control-label col-md-4 text-right">传出参数:</label>
+											  class="control-label col-md-4 text-right"><font color="red">*</font>响应码说明:</label>
 									   <div class="col-md-8 paddingnone">
-										   <button type="button" id="add_btn_out2">
-											   <i class="fa fa-plus"></i> 添加传出参数
+										   <button type="button" id="add_btn_out_desc">
+											   <i class="fa fa-plus"></i> 添加响应码说明
 										   </button>
 									   </div>
 								   </div>
@@ -509,13 +578,10 @@
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 											<div class="form-group">
 												<label for="span-medium-2"
-													class="control-label col-md-4 text-right">输入说明:</label>
+													class="control-label col-md-4 text-right"><font color="red">*</font>输入说明:</label>
 												<div class="col-md-8 paddingnone">
 													<textarea name="inExplain"
 															  id="IN_EXPLAIN_SHOW" class="form-control" rows="5" cols="28"></textarea>
-													<%--<input name="inExplain"--%>
-														<%--id="IN_EXPLAIN_SHOW" class="form-control"--%>
-														<%--placeholder="输入说明">--%>
 												</div>
 											</div>
 										</div>
@@ -523,7 +589,7 @@
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 											<div class="form-group">
 												<label for="span-medium-2"
-													class="control-label col-md-4 text-right">响应说明:</label>
+													class="control-label col-md-4 text-right"><font color="red">*</font>响应说明:</label>
 												<div class="col-md-8 paddingnone">
 													<textarea name="outExplain"
 															  id="OUT_EXPLAIN_SHOW" class="form-control" rows="5" cols="28"></textarea>
@@ -537,7 +603,7 @@
 							   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 								   <div class="form-group">
 									   <label for="span-medium-2"
-											  class="control-label col-md-4 text-right">接口描述:</label>
+											  class="control-label col-md-4 text-right"><font color="red">*</font>接口描述:</label>
 									   <div class="col-md-8 paddingnone">
 													<textarea name="interDesc"
 															  id="INTER_DESC_SHOW"rows="5" class="form-control" cols="28"></textarea>
@@ -551,7 +617,7 @@
 							   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 								   <div class="form-group">
 									   <label for="span-medium-2"
-											  class="control-label col-md-4 text-right">接口概述:</label>
+											  class="control-label col-md-4 text-right"><font color="red">*</font>接口概述:</label>
 									   <div class="col-md-8 paddingnone">
 													<textarea name="interSummary"
 															  id="INTER_SUMMARY_SHOW" rows="5"  class="form-control" cols="28"></textarea>
@@ -649,6 +715,7 @@
         var paraDateIn3;
         var paraDateOut3;
         var paraFlag;
+        var paraMessageDate;
 
 		function pageing(opp) {
 			$(window.document).scrollTop(0, 500);
@@ -713,9 +780,9 @@
 	    }
 		//初始化页面功能
 		$(function(){
-			<!---------------------在此手动设置按钮的权限------------------------------->
+			<!-- -------------------在此手动设置按钮的权限----------------------------- -->
 			//if (!hasPermission(PERMISSSIONCONST.SES1002)) {$("#").hide();}
-			<!---------------------在此手动初始化页面表单审核状态数据源---------------------->
+			<!-- -------------------在此手动初始化页面表单审核状态数据源-------------------- -->
 			<!--getComboStore系统表生成下拉框    参数说明1：传入值，用于下拉框回显，2下拉夸ID，3传入key值，4传入FALSE或者TRUE用于下拉框可选或者可读状态，FALSE下拉框可以不是disabled，TRUE是disabled状态-->
 			<!--getCustomStore自定义下拉框    参数说明1：传入值，用于下拉框回显，2下拉夸ID，3传入FALSE或者TRUE用于下拉框可选或者可读状态，FALSE下拉框可以不是disabled，TRUE是disabled状态-->
 			<!--如果不需要回显第一个参数传入""，如果不需要设定disabled属性传入FALSE-->
@@ -760,6 +827,46 @@
 	    	//添加保存按钮
 	    	var param = {};
 			$("#addform_save_btn").off('click').on('click', function() {
+			    if(null == $("#INTER_NM_SHOW").val() || "" == $("#INTER_NM_SHOW").val()) {
+                    bootbox.alert("接口名称为必填字段，请输入！");
+                    return;
+				}
+                if(null == $("#INTER_METHOD_NM_SHOW").val() || "" == $("#INTER_METHOD_NM_SHOW").val()) {
+                    bootbox.alert("接口方法名为必填字段，请输入！");
+                    return;
+                }
+                if(null == $("#INTER_METHOD_NM_DESC_SHOW").val() || "" == $("#INTER_METHOD_NM_DESC_SHOW").val()) {
+                    bootbox.alert("接口方法名描述为必填字段，请输入！");
+                    return;
+                }
+                if(null == $("#INTER_CLASS_NM_SHOW").val() || "" == $("#INTER_CLASS_NM_SHOW").val()) {
+                    bootbox.alert("接口类名为必填字段，请输入！");
+                    return;
+                }
+                if(null == $("#INTER_CLASS_NM_DESC_SHOW").val() || "" == $("#INTER_CLASS_NM_DESC_SHOW").val()) {
+                    bootbox.alert("接口类名描述为必填字段，请输入！");
+                    return;
+                }
+                if(null == $("#IN_EXPLAIN_SHOW").val() || "" == $("#IN_EXPLAIN_SHOW").val()) {
+                    bootbox.alert("输入说明为必填字段，请输入！");
+                    return;
+                }
+                if(null == $("#OUT_EXPLAIN_SHOW").val() || "" == $("#OUT_EXPLAIN_SHOW").val()) {
+                    bootbox.alert("响应说明为必填字段，请输入！");
+                    return;
+                }
+                if(null == $("#INTER_DESC_SHOW").val() || "" == $("#INTER_DESC_SHOW").val()) {
+                    bootbox.alert("接口描述为必填字段，请输入！");
+                    return;
+                }
+                if(null == $("#INTER_SUMMARY_SHOW").val() || "" == $("#INTER_SUMMARY_SHOW").val()) {
+                    bootbox.alert("接口概述为必填字段，请输入！");
+                    return;
+                }
+                if(null == paraMessageDate || "" == paraMessageDate) {
+                    bootbox.alert("响应码说明为必填字段，请输入！");
+                    return;
+				}
 							param.uuid = $("#UUID_SHOW").val();
 							param.interNm = $("#INTER_NM_SHOW").val();
 							param.interDesc = $("#INTER_DESC_SHOW").val();
@@ -774,7 +881,16 @@
 							param.outExplain = $("#OUT_EXPLAIN_SHOW").val();
 				var hiddenType = $("#hiddenType").val();
 				var url = "";
+				param.codeMessageUuid = paraMessageDate;
 				if("1" == hiddenType){
+                    if(null == paraDateIn || "" == paraDateIn) {
+                        bootbox.alert("传入参数为必填字段，请输入！");
+                        return;
+                    }
+                    if(null == paraDateOut || "" == paraDateOut) {
+                        bootbox.alert("传出参数为必填字段，请输入！");
+                        return;
+                    }
                     param.transParame = paraDateIn+"@@"+paraDateIn2+"@@"+paraDateIn3;
                     param.outParame = paraDateOut+"@@"+paraDateOut2+"@@"+paraDateOut3;
 				    url = baseURL + "/ses/tBapInterBasicInf/save";
@@ -821,6 +937,7 @@
                 paraDateIn3=demo;
                 paraDateOut3=demo;
                 paraFlag=demo;
+
             }
 	    	//删除按钮
 			$("#dele_btn").on('click', function() {
@@ -885,7 +1002,6 @@
 					dataType : "json",
 					success:function(data){
 					<!--修改页面展示字段-->
-//								document.getElementById('UUID_SHOW').value=data.data.uuid;
 								document.getElementById('INTER_NM_SHOW').value=data.data.interNm;
 								document.getElementById('INTER_DESC_SHOW').value=data.data.interDesc;
 								document.getElementById('INTER_SUMMARY_SHOW').value=data.data.interSummary;
@@ -1005,7 +1121,7 @@
     			    			trData.push(obj.outParame);
     			    			trData.push(obj.inExplain);
     			    			trData.push(obj.outExplain);
-    			    		trData.push("<a href='javascript:void(0)'  onclick=genarate('"+obj.uuid+"')><i class='fa fa-plus'></i>生成文档</a>");
+    			    		trData.push("<a href='javascript:void(0)'  onclick=genarate('"+obj.uuid+"')>生成文档</a>");
     			    	for(i=0; i < trData.length; i++){
     			    		if(trData[i] == undefined){
     			    			trData[i] = '';
@@ -1055,6 +1171,9 @@
         var indexCount1 = 15;
         var indexCount2 = 15;
         var indexCount3 = 15;
+		var fatherUuid;
+
+		var indexCountMes = 15;
         function addTableRow(level){
 
             if (level=="1"){
@@ -1100,14 +1219,29 @@
             td.append($("<input name='fixedAmt' id='"+level+"fixedAmt_"+indexCount+"' class='form-control'/>"));
             tr.append(td);
 
-			/*第六列  */
+            /*第六列  描述*/
             var td = $("<td class='nowrap'></td>");
-            td.append($("<button style='display:none;' name='add_Button' onclick='addMyObject("+indexCount+","+level+");return false' id='"+level+"add_Button_"+indexCount+"' class='form-control'>添加</button>"));
+            td.append($("<input style='display: none' name='description' id='"+level+"DESCRIPTION_"+indexCount+"' class='form-control'/>"));
             tr.append(td);
 
 			/*第七列  */
             var td = $("<td class='nowrap'></td>");
+            td.append($("<button style='display:none;' name='add_Button' onclick='addMyObject("+indexCount+","+level+");return false' id='"+level+"add_Button_"+indexCount+"' class='form-control'>添加</button>"));
+            tr.append(td);
+
+			/*第八列  */
+            var td = $("<td class='nowrap'></td>");
             td.append($("<input style='display: none' name='level_UUID' id='level_UUID_"+indexCount+"' class='form-control'/>"));
+            tr.append(td);
+
+            /*第九列 父id */
+            var td = $("<td class='nowrap'></td>");
+            td.append($("<input style='display: none' name='father_UUID' id='"+level+"father_UUID_"+indexCount+"' class='form-control'/>"));
+            tr.append(td);
+
+            /*第十列  uuid*/
+            var td = $("<td class='nowrap'></td>");
+            td.append($("<input style='display: none' name='UUID' id='"+level+"UUID_"+indexCount+"' class='form-control'/>"));
             tr.append(td);
 
 			if(level=="1"){
@@ -1117,6 +1251,11 @@
             }
             var element =level+"tr_"+indexCount;
             $("#" + element).show();
+            if(level=="2") {
+                document.getElementById(level+"father_UUID_"+indexCount).value = fatherUuid;
+            } else if(level == "3") {
+                document.getElementById(level+"father_UUID_"+indexCount).value = fatherUuid;
+            }
         }
 
         // 下拉框事件
@@ -1125,26 +1264,29 @@
             var type = document.getElementById(level+"payFlg_"+indexCount).value;
             if ('Object' == type) {
                 $("#"+level+"add_Button_"+indexCount).css('display','block');
+                $("#"+level+"DESCRIPTION_"+indexCount).css('display','block');
             }
             else {
                 $("#"+level+"add_Button_"+indexCount).css('display','none');
+                $("#"+level+"DESCRIPTION_"+indexCount).css('display','none');
             }
 
         }
-
         function addMyObject(indexCount,level){
-
-
-
 //            $("#level_UUID_"+indexCount).val("111");
 //			    alert(document.getElementById("level_UUID_"+indexCount).value);
 			if(level=="1"){
-                $("#allotTimingTable2").DataTable().clear().draw();
+			    //$("#allotTimingTable2").DataTable().clear().draw();
+                var lastuuid = uuid();
+                document.getElementById(level+"UUID_"+indexCount).value = lastuuid;
+                fatherUuid = lastuuid;
                 $("#allotTimingWin2").modal('show');
             }
             if(level=="2"){
-
-			    $("#allotTimingTable3").DataTable().clear().draw();
+			   // $("#allotTimingTable3").DataTable().clear().draw();
+                var lastuuid = uuid();
+                document.getElementById(level+"UUID_"+indexCount).value = lastuuid;
+                fatherUuid = lastuuid;
                 $("#allotTimingWin3").modal('show');
             }
 
@@ -1168,16 +1310,120 @@
 
         $("#add_btn_in").on('click', function() {
             $("#allotTimingTable").DataTable().clear().draw();
+            $("#allotTimingTable2").DataTable().clear().draw();
+            $("#allotTimingTable3").DataTable().clear().draw();
             $("#allotTimingWin").modal('show');
+            var title = document.getElementById("paramAdd_title");
+            title.innerHTML = "传入参数添加";
             paraFlag="in";
             initPara();
         });
         $("#add_btn_out").on('click', function() {
             $("#allotTimingTable").DataTable().clear().draw();
+            $("#allotTimingTable2").DataTable().clear().draw();
+            $("#allotTimingTable3").DataTable().clear().draw();
             $("#allotTimingWin").modal('show');
+            var title = document.getElementById("paramAdd_title");
+            title.innerHTML = "传出参数添加";
             paraFlag="out";
             initPara();
         });
+
+		//添加响应码说明
+        $("#add_btn_out_desc").on('click', function() {
+            $("#add_message_modal").modal('show');
+        });
+
+		//添加响应码行
+		function addMessageRow(){
+            indexCount = indexCountMes;
+            indexCount += 1;
+            indexCountMes = indexCount;
+
+            var tr = $("<tr style='display:none' id='tr_"+indexCount+"'></tr>");
+            /*第一列  */
+            var td = $("<td class='nowrap'></td>");
+            td.append($("<input type='checkbox' class='group-checkable' id='"+indexCount+"' />"));
+            tr.append(td);
+
+            /*第二列  */
+            var td = $("<td class='nowrap'></td>");
+            td.append($("<input name='code' id='code_"+indexCount+"' class='form-control'/>"));
+            tr.append(td);
+
+            /*第三列  */
+            var td = $("<td class='nowrap'></td>");
+            td.append($("<input id='message_"+indexCount+"' name='message' class=' form-control'/>"));
+            tr.append(td);
+
+            /*第四列  uuid*/
+            var td = $("<td class='nowrap'></td>");
+            td.append($("<input style='display: none' id='uuid_"+indexCount+"' name='uuid' class=' form-control'/>"));
+            tr.append(td);
+
+            $("#add_message_table tbody").append(tr);
+            var element ="tr_"+indexCount;
+            $("#" + element).show();
+
+            document.getElementById("uuid_"+indexCount).value = uuid();
+        }
+
+        // 删除返回码所选中的表格
+        function delMessageRow(){
+
+            var selectRocords = $("#add_message_table"+" tbody input:checked");
+            if (selectRocords.length <= 0) {
+                bootbox.alert("请选择要删除的数据！");
+                return;
+            }else {
+                for(i=0; i < selectRocords.length; i ++) {
+                    var tr = selectRocords[i].parentNode.parentNode;
+                    var tbody = tr.parentNode;
+                    tbody.removeChild(tr);
+                }
+            }
+        }
+
+        // 保存响应码信息
+        function saveMessageRow() {
+            saveMessage();
+            indexCountMes = 15;
+		}
+
+        function saveMessage() {
+            var table = document.getElementById("add_message_table");
+            var rows = table.rows.length;
+            var array = [];
+            var a = 0;
+			for (i = 16; i <= indexCountMes; i++){
+				if(document.getElementById(i)){
+					var row = {};
+                    row.uuid = document.getElementById("uuid_"+i).value;
+					row.code = document.getElementById("code_"+i).value.trim();
+					row.message = document.getElementById("message_"+i).value.trim();
+				}
+				else {
+					continue;
+				}
+				array[a] = row;
+				a++;
+			}
+			var param = {};
+			param.messDatas = array;
+			var myuuid=uuid();
+			param.oldUuid="Mess_"+myuuid;
+			var codeMessageDatas = JSON.stringify(param);
+            paraMessageDate = codeMessageDatas;
+			$("#add_message_modal").modal('hide');
+        }
+
+        //取消添加响应码
+		function message_cancel_btn() {
+            $("#add_message_modal").modal('hide');
+            $("#add_message_table").DataTable().clear().draw();
+            indexCountMes = 15;
+        }
+
 		//初始化参数
 		function initPara() {
             var demo;
@@ -1205,12 +1451,10 @@
             savePara(paraFlag,level);
             if (level==""){
                 indexCount1 = 15;
-            }
-            else if(level=="2"){
-                indexCount2 = 15;
-            }
-            else {
-                indexCount3 = 15;
+            }else if(level == "2") {
+
+            }else{
+
             }
         }
 
@@ -1233,6 +1477,8 @@
                         row.required = document.getElementById(level+"keepAmt_"+i).value.trim();
                         row.remarks = document.getElementById(level+"fixedAmt_"+i).value.trim();
                         row.fieldNm = document.getElementById(level+"pointTime_"+i).value.trim();
+                        row.levelUuid = document.getElementById(level+"UUID_"+i).value.toString();
+                        row.description = document.getElementById(level+"DESCRIPTION_"+i).value.toString();
                     }
                     else {
                         continue;
@@ -1259,12 +1505,14 @@
             if(level=="2"){
                 for (i = 15; i <=indexCount2; i++){
                     if(document.getElementById(i)){
-
                         var row = {};
                         row.fieldTyp = document.getElementById(level+"payFlg_"+i).value.trim();
                         row.required = document.getElementById(level+"keepAmt_"+i).value.trim();
                         row.remarks = document.getElementById(level+"fixedAmt_"+i).value.trim();
                         row.fieldNm = document.getElementById(level+"pointTime_"+i).value.trim();
+                        row.infoUuid = document.getElementById(level+"father_UUID_"+i).value.toString();
+                        row.levelUuid = document.getElementById(level+"UUID_"+i).value.toString();
+                        row.description = document.getElementById(level+"DESCRIPTION_"+i).value.toString();
                     }
                     else {
                         continue;
@@ -1297,6 +1545,8 @@
                         row.required = document.getElementById(level+"keepAmt_"+i).value.trim();
                         row.remarks = document.getElementById(level+"fixedAmt_"+i).value.trim();
                         row.fieldNm = document.getElementById(level+"pointTime_"+i).value.trim();
+                        row.infoUuid = document.getElementById(level+"father_UUID_"+i).value.toString();
+                        row.description = document.getElementById(level+"DESCRIPTION_"+i).value.toString();
                     }
                     else {
                         continue;
@@ -1320,9 +1570,6 @@
                 }
                 $("#allotTimingWin3").modal('hide');
             }
-
-
-
         }
 		<!--操作链接点击事件-->
 		function genarate(uuid){

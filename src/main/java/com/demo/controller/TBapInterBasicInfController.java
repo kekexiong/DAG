@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author hu_pf@suixingpay.com
@@ -80,11 +81,11 @@ public class TBapInterBasicInfController extends BaseController {
         String tcd = "TBapInterBasicInfController.queryCondition";
         String opNm = "接口信息-详细";
         try {
+            LOGGER.info(LogUtils.genLogs(LogType.BAP, tcd, "", opNm + "--begin"));
             FreemarkerUtil util = new FreemarkerUtil();
-
-            util.fprint("01.ftl", tBapInterBasicInfService.generatePara(paramVo), "01.doc");
-
-            return super.setFailure("生成成功");
+            util.fprint("01.ftl", tBapInterBasicInfService.generatePara(paramVo), UUID.randomUUID().toString()+"结算接口文档.doc");
+            LOGGER.info(LogUtils.genLogs(LogType.BAP, tcd, "", opNm + "--end"));
+            return super.setSuccess("生成成功");
         } catch (Exception e) {
             LOGGER.error(LogUtils.genLogs(LogType.BAP, tcd, "", opNm + "--end,异常" + e.getMessage()));
             return super.setFailure("查询失败");

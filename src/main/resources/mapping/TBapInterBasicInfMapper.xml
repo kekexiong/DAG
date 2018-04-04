@@ -15,6 +15,7 @@
 	 <result column="OUT_PARAME" property="outParame"/>
 	 <result column="IN_EXPLAIN" property="inExplain"/>
 	 <result column="OUT_EXPLAIN" property="outExplain"/>
+	 <result column="CODE_MESSAGE_UUID" property="codeMessageUuid"/>
 	</resultMap>
 	
 	<sql id="whereQueryCondition">
@@ -36,7 +37,8 @@
 						t.TRANS_PARAME as "transParame",
 						t.OUT_PARAME as "outParame",
 						t.IN_EXPLAIN as "inExplain",
-						t.OUT_EXPLAIN as "outExplain"
+						t.OUT_EXPLAIN as "outExplain",
+						t.CODE_MESSAGE_UUID AS "codeMessageUuid"
 			<!-- 请在此关联查询表 -->
 		FROM bap.T_BAP_INTER_BASIC_INF t
 			<include refid="whereQueryCondition"></include>
@@ -61,7 +63,8 @@
 					TRANS_PARAME,
 					OUT_PARAME,
 					IN_EXPLAIN,
-					OUT_EXPLAIN
+					OUT_EXPLAIN,
+					CODE_MESSAGE_UUID
 		) VALUES (
 					#{uuid,jdbcType=VARCHAR},
 					#{interNm,jdbcType=VARCHAR},
@@ -74,12 +77,13 @@
 					#{transParame,jdbcType=VARCHAR},
 					#{outParame,jdbcType=VARCHAR},
 					#{inExplain,jdbcType=VARCHAR},
-					#{outExplain,jdbcType=VARCHAR}
+					#{outExplain,jdbcType=VARCHAR},
+					#{codeMessageUuid,jdbcType=VARCHAR}
 		)
 	</insert>
 	<select id="getByKey" parameterType="com.demo.entity.TBapInterBasicInf" resultMap="tBapInterBasicInfMap">
 		SELECT
-			UUID, INTER_NM, INTER_DESC, INTER_SUMMARY, INTER_METHOD_NM, INTER_METHOD_NM_DESC, INTER_CLASS_NM, INTER_CLASS_NM_DESC, TRANS_PARAME, OUT_PARAME, IN_EXPLAIN, OUT_EXPLAIN
+			UUID, INTER_NM, INTER_DESC, INTER_SUMMARY, INTER_METHOD_NM, INTER_METHOD_NM_DESC, INTER_CLASS_NM, INTER_CLASS_NM_DESC, TRANS_PARAME, OUT_PARAME, IN_EXPLAIN, OUT_EXPLAIN,CODE_MESSAGE_UUID
 		FROM 
 			bap.T_BAP_INTER_BASIC_INF
 		WHERE
@@ -99,7 +103,8 @@
 					TRANS_PARAME=#{transParame},
 					OUT_PARAME=#{outParame},
 					IN_EXPLAIN=#{inExplain},
-					OUT_EXPLAIN=#{outExplain}
+					OUT_EXPLAIN=#{outExplain},
+					CODE_MESSAGE_UUID = #{codeMessageUuid}
 		WHERE
   					UUID=#{uuid}
 			
@@ -123,7 +128,8 @@
 		REMARKS,
 		LEVEL_PARA,
 		INFO_UUID,
-		LEVEL_UUID
+		LEVEL_UUID,
+		DESCRIPTION
 		) VALUES (
 		#{uuid,jdbcType=VARCHAR},
 		#{fieldNm,jdbcType=VARCHAR},
@@ -132,7 +138,8 @@
 		#{remarks,jdbcType=VARCHAR},
 		#{levelPara,jdbcType=VARCHAR},
 		#{infoUuid,jdbcType=VARCHAR},
-		#{levelUuid,jdbcType=VARCHAR}
+		#{levelUuid,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR}
 		)
 	</insert>
 
@@ -145,7 +152,8 @@
 						REMARKS as "remarks",
 						LEVEL_PARA as "levelPara",
 						INFO_UUID as "infoUuid",
-						LEVEL_UUID as "levelUuid"
+						LEVEL_UUID as "levelUuid",
+						DESCRIPTION as "description"
 		FROM bap.T_BAP_INTER_PARA where INFO_UUID=#{uuid}
 	</select>
 
@@ -158,4 +166,29 @@
 			#{item}
 		</foreach>
 	</delete>
+	
+	<insert id="insertCodeMessage" parameterType="map">
+		INSERT INTO BAP.T_BAP_DAG_CODE_MESSAGE (
+		UUID,
+		OLD_UUID,
+		CODE,
+		MESSAGE
+		) VALUES (
+		#{uuid,jdbcType=VARCHAR},
+		#{oldUuid,jdbcType=VARCHAR},
+		#{code,jdbcType=VARCHAR},
+		#{message,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<select id="selectCodeMessByUuid" parameterType="String" resultType="Map">
+		SELECT
+			UUID AS "uuid",
+			OLD_UUID AS "oldUuid",
+			CODE AS "code",
+			MESSAGE AS "message"
+		FROM
+			BAP.T_BAP_DAG_CODE_MESSAGE
+		WHERE OLD_UUID = #{uuid}
+	</select>
 </mapper>
