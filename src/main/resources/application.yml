@@ -2,9 +2,9 @@ server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:oracle:thin:@172.16.135.252:1521/BAPDB
-    username: bap
-    password: bap_sit
+    url: jdbc:oracle:thin:@
+    username: 
+    password: 
   freemarker:
     suffix: .ftl
     templateEncoding: UTF-8
